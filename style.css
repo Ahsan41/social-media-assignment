@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    height: 100vh;
+}
+.container{
+    /* margin: 100px auto 0; */
+  height: 100%;
+  flex-direction: row;
+  justify-content: space-around;  
+  align-items: center;
+}
+.fb-col{
+    width: 50%;
+}
+#logo img{
+    width: 250px;
+   
+}
+.heading h2{
+    font-size: 25px;
+}
+
+.data-entry-col {
+    box-shadow: 3px 3px 10px #e2e2e2, -2px -0px 10px #e2e2e2;
+    border-radius: 10px; 
+    padding: 30px 10px 40px 10px; 
+    background-color: #ffffff;
+}
+.forget-pass{
+    text-align: center;
+    margin-top: 5px;
+}
+
+#account {
+    text-align: center;
+}
+
+.para {
+    padding: 30px 0px  ;
+}
+
+           /*  modal se pehle tk ki css  */
+.d-o-b .gender{
+    font-size: 12px;
+}
+.firstnameAndlastname{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.modal-header{
+    padding: 0px 20px;
+}
+.modal-body{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.btn-secondary{
+    color: black;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+}
+.btn-secondary:hover{
+    color: black;
+    background-color: #fff;
+}
+.btn-secondary:focus{
+    color: black;
+    background-color: #fff;
+}
