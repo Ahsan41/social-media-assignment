@@ -219,7 +219,7 @@ async function addUserHandler(uid) {
             lastName: surName.value,
             email: signUpEmail.value,
             mobileNumber: userMobNum.value,
-            password:signUpPassword.value
+            password:signUpPassword.value 
         //  userDateofbirth : new Date (`${signUpYear}-${signUpMonth}-${signUpDate}`),
         //  gender:signUpgender,
 

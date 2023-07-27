@@ -16,10 +16,6 @@ const postBtn=document.querySelector(`.post-btn`)
 const postInputBox = document.getElementById('postInputBox')
 console.log(postInputBox)
 const postArea = document.querySelector(`.post-area`)
-const userNameOnDashboard = document.querySelector(`.userNameOnDashboard`)
-const emailAddresOnDashboard = document.querySelector(`.emailAddresOnDashboard`)
-const dashBoardpp = document.querySelector('.dashboardPP')
-
 
 // console.log(postBtn)
 
@@ -33,7 +29,7 @@ onAuthStateChanged(auth, (user) => {
         // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
         console.log(uid)
-        getUserData(uid)
+        // getUserData(uid)
         currentLoggedInUser = uid
         // // ...
     } else {
@@ -43,32 +39,6 @@ onAuthStateChanged(auth, (user) => {
         window.location.href = '../login/login.html'
     }
 });
-
-let ppOfLoggedInUser
-
-async function getUserData(uid){
-    try {
-        const docRef = doc(db, "users", uid);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-            // console.log("Document data:", docSnap.data());
-            const {  firstName, email , profilePicture} = docSnap.data()
-            ppOfLoggedInUser = profilePicture
-            console.log(profilePicture, "==>>profilePicture")
-            emailAddresOnDashboard.textContent = email || 'No email updated'
-            userNameOnDashboard.textContent= firstName
-            // lastNameHTML.textContent = lastName
-            dashBoardpp.src = profilePicture || '../assets/user.jpg'
-        } else {
-            // docSnap.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    } catch (error) {
-        console.log(error, "==>>error in get User Data")
-    }
-}
-
 
 
 postBtn.addEventListener('click', postHandler)
@@ -81,8 +51,8 @@ async function postHandler() {
         const docRef = await addDoc(collection(db, "posts"), {
             id: currentLoggedInUser,
             postContent: postInputBox.value,
+            
           });
-
           getPosts()
           console.log("Document written with ID: ", docRef.id);
     } catch (e) {
@@ -154,5 +124,3 @@ async function getAuthorData(authorUid) {
     }
 }
 
-
-// getPosts()
