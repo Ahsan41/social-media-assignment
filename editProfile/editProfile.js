@@ -124,7 +124,8 @@ function editProfileHandler() {
                     latName: surName.value,
                     email : Email.value ,
                     mobileNumber : userMobNum.value,
-                    profilePicture : downloadURL
+                    profilePicture : downloadURL,
+                    Password : Password.value
                 });
             });
         }

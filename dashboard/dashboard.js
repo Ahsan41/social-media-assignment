@@ -8,9 +8,14 @@ import {
     setDoc,
     addDoc,
     collection,
-    getDocs
-}
-from '../firebaseconfig.js'
+    getDocs,
+    ref,
+    storage,
+    getDownloadURL,
+    uploadBytesResumable,
+    deleteDoc,
+    updateDoc
+} from '../firebaseconfig.js'
 
 const postBtn=document.querySelector(`.post-btn`)
 const postInputBox = document.getElementById('postInputBox')
@@ -20,6 +25,7 @@ const userNameOnDashboard = document.querySelector(`.userNameOnDashboard`)
 const emailAddresOnDashboard = document.querySelector(`.emailAddresOnDashboard`)
 const dashBoardpp = document.querySelector('.dashboardPP')
 const uploadImage = document.querySelector(`.upload-image`) 
+const pp = document.querySelector(`.ppOnNav`)
 
 
 // console.log(postBtn)
@@ -61,6 +67,7 @@ async function getUserData(uid){
             userNameOnDashboard.textContent= firstName
             // lastNameHTML.textContent = lastName
             dashBoardpp.src = profilePicture || '../assets/user.jpg'
+            pp.src =profilePicture || '../assets/user.png'
         } else {
             // docSnap.data() will be undefined in this case
             console.log("No such document!");
@@ -155,17 +162,20 @@ async function getPosts() {
     postArea.innerHTML = ''
     const querySnapshot = await getDocs(collection(db, "posts"));
 
-    querySnapshot.forEach(async (doc) => {
+    querySnapshot.forEach( async(docs) => {
         // doc.data() is never undefined for query doc snapshots
         // console.log(doc);
-        const { id, postContent ,postImageUrl} = doc.data()
-        console.log(id)
-        console.log(postContent)
+        const {  postContent ,postImageUrl,authorId} = docs.data()
+        // console.log(id)
+        console.log(postContent,authorId)
+        const docRef = doc(db, "users", authorId);
+        const docSnap = await getDoc(docRef);
+    console.log(docSnap,"docsnap")
+       const authorDetails = docSnap.data();
 
-       
+   
 
-        const authorDetails = await getAuthorData(id)
-
+        console.log("Document data:", authorDetails);
         
         const postElement = document.createElement('div')
         postElement.setAttribute('class', 'posts')
@@ -198,21 +208,34 @@ async function getPosts() {
     
 }
 
-async function getAuthorData(authorUid) {
-    console.log(authorUid, "==>>authorUid")
+// async function getAuthorData(authorUid) {
+//     console.log(authorUid, "==>>authorUid")
 
 
-    const docRef = doc(db, "users", authorUid);
-    const docSnap = await getDoc(docRef);
+//     const docRef = doc(db, "users", authorUid);
+//     const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-        return docSnap.data()
-    } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
-    }
-}
+//     if (docSnap.exists()) {
+//         // console.log("Document data:", docSnap.data());
+//         return docSnap.data()
+//     } else {
+//         // docSnap.data() will be undefined in this case
+//         console.log("No such document!");
+//     }
+// }
 
 
 // getPosts()
+const logout = document.querySelector(`.logout`)
+
+const logoutHandler = () => {
+    signOut(auth).then(() => {
+        // Sign-out successful.
+        // console.log("signout successfully")
+        window.location.href = '../login/index.html'
+    }).catch((error) => {
+        // An error happened.
+    });
+    
+}
+logout.addEventListener(`click`, logoutHandler)

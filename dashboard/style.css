@@ -54,7 +54,7 @@ color: #fff;
 }
 
 .navextra ul{
-    display: flex;
+    /* display: flex; */
     list-style-type: none;
     justify-content: space-between;
     font-size: 25px;
@@ -81,6 +81,7 @@ color: #fff;
     /* height: 100vh; */
     background: #fff;
     border-radius: 4px;
+    height: fit-content;
 }
 .right-sidebar{
     /* background: #cbdffa; */
@@ -91,7 +92,7 @@ color: #fff;
     background: #fff;
     padding:20px ;
     border-radius: 4px;
-
+    height: fit-content;
     color: #626262;
 }
 .postarea{
@@ -376,4 +377,7 @@ color: #fff;
     display: flex;
     height: 50px;
     display: inline-block;
+}
+.dropdown{
+    /* background: #000; */
 }
